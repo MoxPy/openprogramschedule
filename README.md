@@ -52,6 +52,85 @@ API Endpoint: http://127.0.0.1:8080
 - `DELETE /schedules/delete-by-id?id={id}`: Delete a schedule by its ID
 - `DELETE /schedules/delete-all`: Delete all schedules
 
+### Models
+
+Program
+
+The Program model represents a television or radio program. The attributes of the Program model include:
+
+    Id (uint, optional): The unique identifier for the program.
+    Name (string): The name of the program.
+    Description (string): A brief description of the program.
+    Host (string): The host of the program.
+    Category (string): The category to which the program belongs.
+    InProduction (bool, optional): A flag indicating whether the program is currently in production.
+
+Schedule
+
+The Schedule model represents the airing schedule for a program. The attributes of the Schedule model include:
+
+    Id (uint, optional): The unique identifier for the schedule.
+    ProgramId (uint): The identifier of the associated program.
+    Description (string): A brief description of the schedule.
+    Day (string): The day of the week when the program airs.
+    Date (string): The date and time when the program airs, formatted as YYYY-MM-DDTHH:MM:SSZ.
+
+### Examples
+
+*Program API*
+
+Add a Program
+Endpoint: POST /programs/add
+
+Request Body:
+
+    {
+        "name": "Science Hour",
+        "description": "A weekly show that explores scientific discoveries.",
+        "host": "Dr. John Doe",
+        "category": "Education",
+        "in_production": true
+    }
+
+Update a Program
+Endpoint: PUT /programs/update?id=1
+
+Request Body:
+
+    {
+        "name": "Advanced Science Hour",
+        "description": "A detailed exploration of scientific discoveries and their implications.",
+        "host": "Dr. John Doe",
+        "category": "Education",
+        "in_production": true
+    }
+
+*Schedule API*
+
+Add a Schedule
+Endpoint: POST /schedules/add
+
+Request Body:
+
+    {
+        "program_id": 1,
+        "description": "First episode of the new season",
+        "day": "Monday",
+        "date": "2024-12-06T12:00:00Z"
+    }
+
+Update a Schedule
+Endpoint: PUT /schedules/update?id=1
+
+Request Body:
+
+    {
+        "program_id": 1,
+        "description": "Updated schedule for the first episode",
+        "day": "Tuesday",
+        "date": "2024-12-07T14:00:00Z"
+    }
+
 ## Middleware
 
 The application includes an authentication middleware to protect endpoints. The middleware checks the Authorization header for a valid token.
